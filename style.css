@@ -39,23 +39,23 @@
 :root {
 	interpolate-size: allow-keywords;
 
-	--background: linear-gradient(45deg, #0c0a09 0%, #1c1917 45%, #0c0a09 100%);
-	--header: linear-gradient(90deg, #1c1917e0, #2dd4bf, #0c0a09);
-	--btn-accent: linear-gradient(135deg, #fb923c, #ea580c);
-	--btn-inherit: #fff7ed;
-	--accent: linear-gradient(135deg, #f97316, #c2410c);
-	--sub-title: linear-gradient(-135deg, #2dd4bf30, #042f2e);
-	--gift: #f0fdfae1;
-	--gift-bg: rgba(251, 146, 60, 0.1);
-	--gift-btn: linear-gradient(135deg, #9a3412, #431407);
+	--background: linear-gradient(45deg, #302e2e 0%, #4b4444 45%, #272525 100%);
+	--header: linear-gradient(90deg, #252525f2, #474747, #202020);
+	--btn-accent: linear-gradient(135deg, #666666, #222222);
+	--btn-inherit: #ffffff;
+	--accent: linear-gradient(135deg, #999999, #333333);
+	--sub-title: linear-gradient(-135deg, #33333350, #111111);
+	--gift: #f3f3f3;
+	--gift-bg: rgba(255, 255, 255, 0.02);
+	--gift-btn: linear-gradient(135deg, #222222, #000000);
 	--border-radius: 10px;
-	--container: #0c0a09;
-	--table: linear-gradient(180deg, #1c1917, #0c0a09);
-	--minus: #38bdf8;
-	--shadow: #fb923c50;
-	--second-shadow: #ea580c;
-	--text-shadow: #2dd4bf;
-	--list-bg: linear-gradient(90deg, rgba(45, 212, 191, 0.1), rgba(251, 146, 60, 0.1));
+	--container: #050505;
+	--table: linear-gradient(180deg, #111111, #000000);
+	--minus: #e63946;
+	--shadow: rgba(0, 0, 0, 0.8);
+	--second-shadow: #222222;
+	--text-shadow: #666666;
+	--list-bg: linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent);
 }
 
 * {
@@ -149,6 +149,7 @@ h6 {
 h1 {
 	font-weight: 700;
 	font-size: 2.4rem;
+	text-shadow: 1px 1px 4px var(--minus);
 }
 
 h2 {
@@ -192,13 +193,15 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	background: var(--header);
-	box-shadow: 0 3px 3px var(--shadow);
+	box-shadow: 0 3px 8px var(--minus);
+	border-radius: var(--border-radius);
 	max-width: 100vw;
 	margin: 0 auto;
 	position: sticky;
 	top: 0;
 	z-index: 100;
 	overflow: hidden;
+	animation: pulse-shadow 3s infinite;
 }
 
 header img {
@@ -207,16 +210,35 @@ header img {
 	border-radius: 10px;
 }
 
+.logo {
+	position: relative;
+}
+
+.blob {
+	position: absolute;
+	width: 65px;
+	height: 65px;
+	background: linear-gradient(135deg, #4de7a7, #067768);
+	box-shadow: 0 0 50px rgba(230, 206, 112, 0.4);
+	border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+	animation: morph 8s ease-in-out infinite;
+
+	filter: blur(1px);
+	z-index: -1;
+}
+
 .header-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 5px;
 }
 
 .h-violet-btn {
 	padding: 10px 20px;
 	font-size: 1rem;
-	border: 1px solid var(--btn-inherit);
+	border: 1px solid var(--minus);
+	border-radius: var(--border-radius);
 	margin-right: 5px;
 	font-weight: 700;
 	transition: all 0.3s ease-in-out;
@@ -225,8 +247,9 @@ header img {
 .h-accent-btn {
 	padding: 12px 20px;
 	font-size: 1rem;
+	border-radius: var(--border-radius);
 	background: var(--btn-accent);
-	box-shadow: 3px 3px 3px var(--gift);
+	box-shadow: 3px 3px 3px var(--minus);
 	text-align: center;
 	font-weight: 700;
 	transition: all 0.3s ease;
@@ -244,9 +267,11 @@ header img {
 }
 
 .h-violet-btn:hover,
-.h-accent-btn:hover {
-	transform: scale(0.9);
-	box-shadow: 1px 1px 5px var(--gift);
+.h-accent-btn:hover,
+.btn-accent:hover {
+	transform: scale(0.95);
+	border: none;
+	box-shadow: 0 0 2px 3px var(--minus);
 }
 
 .h-app-link:hover {
@@ -358,7 +383,7 @@ header img {
 	padding-bottom: 10px;
 	margin: 30px auto;
 	background: var(--container);
-	box-shadow: 0 0 13px var(--second-shadow);
+	box-shadow: 0 0 10px var(--minus);
 }
 
 .container:nth-child(odd) {
@@ -445,7 +470,7 @@ table th {
 
 table tr:nth-child(even) {
 	background: var(--second-shadow);
-	box-shadow: 0 3px 3px var(--gift-bg);
+	box-shadow: 0 1px 3px var(--text-shadow);
 }
 .row-title {
 	padding-left: 10px;
@@ -561,10 +586,9 @@ summary {
 	position: fixed;
 	right: 20px;
 	bottom: 20px;
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	background: var(--accent);
-	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -858,13 +882,13 @@ footer a img {
 
 @keyframes pulse-shadow {
 	0% {
-		box-shadow: 0 0 25px 3px var(--second-shadow);
+		box-shadow: 0 0 25px 3px var(--minus);
 	}
 	50% {
-		box-shadow: 0 0 15px 8px var(--second-shadow);
+		box-shadow: 0 0 15px 8px var(--minus);
 	}
 	100% {
-		box-shadow: 0 0 25px 3px var(--second-shadow);
+		box-shadow: 0 0 25px 3px var(--minus);
 	}
 }
 
